@@ -10,3 +10,11 @@ class User(models.Model):
     address = models.CharField(max_length=55)
     contact = models.CharField(max_length=20,
                                help_text='Enter phone number')
+
+    def __init__(self, *args, **kwargs):
+        """Initializes a user"""
+        super().__init__(*args, **kwargs)
+
+
+class Customer(User, models.Model):
+    pass
