@@ -32,9 +32,11 @@ class Customer(User):
                                   choices=MEMBERSHIP_CHOICES,
                                   default=MEMBERSHIP_BRONZE)
 
+
 class ServiceProvider(User):
     comapny_name = models.CharField(max_length=55, null=True)
-    service_area = 
+    service_area = models.TextField(help_text='Please provide service area(s)')
+
 
 class Order(models.Model):
     PAYMENT_STATUS_PENDING = 'P'
