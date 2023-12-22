@@ -2,15 +2,6 @@ from django.db import models
 
 
 class User(models.Model):
-    MEMBERSHIP_BRONZE = 'B'
-    MEMBERSHIP_SILVER = 'S'
-    MEMBERSHIP_GOLD = 'G'
-
-    MEMBERSHIP_CHOICES = [
-        (MEMBERSHIP_BRONZE, 'Bronze'),
-        (MEMBERSHIP_SILVER, 'Silver'),
-        (MEMBERSHIP_GOLD, 'Gold'),
-    ]
     username = models.CharField(max_length=55)
     first_name = models.CharField(max_length=55)
     last_name = models.CharField(max_length=55)
@@ -20,14 +11,30 @@ class User(models.Model):
     contact = models.CharField(max_length=20,
                                help_text='Enter phone number')
     birth_date = models.DateField(null=True)
-    membership = models.CharField(max_length=1,
-                                  choices=MEMBERSHIP_CHOICES,
-                                  default=MEMBERSHIP_BRONZE)
 
     def __init__(self, *args, **kwargs):
         """Initializes a user"""
         super().__init__(*args, **kwargs)
 
+
+class Customer(User):
+    MEMBERSHIP_BRONZE = 'B'
+    MEMBERSHIP_SILVER = 'S'
+    MEMBERSHIP_GOLD = 'G'
+
+    MEMBERSHIP_CHOICES = [
+        (MEMBERSHIP_BRONZE, 'Bronze'),
+        (MEMBERSHIP_SILVER, 'Silver'),
+        (MEMBERSHIP_GOLD, 'Gold'),
+    ]
+
+    membership = models.CharField(max_length=1,
+                                  choices=MEMBERSHIP_CHOICES,
+                                  default=MEMBERSHIP_BRONZE)
+
+class ServiceProvider(User):
+    comapny_name = models.CharField(max_length=55, null=True)
+    service_area = 
 
 class Order(models.Model):
     PAYMENT_STATUS_PENDING = 'P'
@@ -49,4 +56,4 @@ class Order(models.Model):
 class Address(models.Model):
     city = models.CharField(max_length=55)
     country = models.CharField(max_length=55)
-    customer = models.OneToOneField()
+    customer = models.OneToOneField(Customer)
