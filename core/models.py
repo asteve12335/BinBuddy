@@ -56,6 +56,8 @@ class Order(models.Model):
 
 
 class Address(models.Model):
+    street = models.TextField(help_text='Please provide popular reference')
     city = models.CharField(max_length=55)
     country = models.CharField(max_length=55)
-    customer = models.OneToOneField(Customer)
+    customer = models.OneToOneField(
+        Customer, on_delete=models.CASCADE, primary_key=True)
