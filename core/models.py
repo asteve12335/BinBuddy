@@ -61,3 +61,9 @@ class Address(models.Model):
     country = models.CharField(max_length=55)
     customer = models.OneToOneField(
         Customer, on_delete=models.CASCADE, primary_key=True)
+
+
+class Garbage(models.Model):
+    size = models.IntegerField(help_text='How many garbage bags?')
+    customer = models.OneToOneField(
+        Customer, on_delete=models.CASCADE, primary_key=True)
