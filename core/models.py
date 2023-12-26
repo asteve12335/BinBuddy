@@ -64,13 +64,23 @@ class Address(models.Model):
         Customer, on_delete=models.CASCADE, primary_key=True)
 
 
+class Promotion(models.Model):
+    description = models.CharField(max_length=255)
+    discount = models.FloatField()
+
+
 class Garbage(models.Model):
     size = models.PositiveSmallIntegerField(help_text='How many garbage bags?')
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     customer = models.OneToOneField(
         Customer, on_delete=models.CASCADE, primary_key=True)
-    
+    promotions = models.ManyToManyField(Promotion)
+
+
 class GarbageCollectionService(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
-    quantity = models.PositiveSmallIntegerField(help_text='How many garbage bags?')
-    unit_price = models.IntegerField(max_digits=6)
-    service_provider = models.ForeignKey(ServiceProvider, on_delete=models.PROTECT)
+    quantity = models.PositiveSmallIntegerField(
+        help_text='How many garbage bags?')
+    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
+    service_provider = models.ForeignKey(
+        ServiceProvider, on_delete=models.PROTECT)
