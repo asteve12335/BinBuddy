@@ -65,6 +65,12 @@ class Address(models.Model):
 
 
 class Garbage(models.Model):
-    size = models.IntegerField(help_text='How many garbage bags?')
+    size = models.PositiveSmallIntegerField(help_text='How many garbage bags?')
     customer = models.OneToOneField(
         Customer, on_delete=models.CASCADE, primary_key=True)
+    
+class GarbageCollectionService(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.PROTECT)
+    quantity = models.PositiveSmallIntegerField(help_text='How many garbage bags?')
+    unit_price = models.IntegerField(max_digits=6)
+    service_provider = models.ForeignKey(ServiceProvider, on_delete=models.PROTECT)
