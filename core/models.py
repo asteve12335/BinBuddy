@@ -6,7 +6,6 @@ class User(models.Model):
     first_name = models.CharField(max_length=55)
     last_name = models.CharField(max_length=55)
     email = models.EmailField(unique=True)
-    image = models.ImageField()
     address = models.CharField(max_length=55)
     contact = models.CharField(max_length=20,
                                help_text='Enter phone number')
@@ -61,7 +60,7 @@ class Address(models.Model):
     city = models.CharField(max_length=55)
     country = models.CharField(max_length=55)
     customer = models.OneToOneField(
-        Customer, on_delete=models.CASCADE, primary_key=True)
+        Customer, on_delete=models.CASCADE, related_name='customer_address', primary_key=True)
 
 
 class Promotion(models.Model):
