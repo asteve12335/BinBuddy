@@ -1,22 +1,7 @@
 from django.db import models
 
 
-class User(models.Model):
-    username = models.CharField(max_length=55)
-    first_name = models.CharField(max_length=55)
-    last_name = models.CharField(max_length=55)
-    email = models.EmailField(unique=True)
-    address = models.CharField(max_length=55)
-    contact = models.CharField(max_length=20,
-                               help_text='Enter phone number')
-    birth_date = models.DateField(null=True)
-
-    def __init__(self, *args, **kwargs):
-        """Initializes a user"""
-        super().__init__(*args, **kwargs)
-
-
-class Customer(User):
+class Customer(models.Model):
     MEMBERSHIP_BRONZE = 'B'
     MEMBERSHIP_SILVER = 'S'
     MEMBERSHIP_GOLD = 'G'
@@ -27,12 +12,30 @@ class Customer(User):
         (MEMBERSHIP_GOLD, 'Gold'),
     ]
 
+    username = models.CharField(max_length=55)
+    first_name = models.CharField(max_length=55)
+    last_name = models.CharField(max_length=55)
+    email = models.EmailField(unique=True)
+    address = models.CharField(max_length=55)
+    contact = models.CharField(max_length=20,
+                               help_text='Enter phone number')
+    birth_date = models.DateField(null=True)
+
     membership = models.CharField(max_length=1,
                                   choices=MEMBERSHIP_CHOICES,
                                   default=MEMBERSHIP_BRONZE)
 
 
-class ServiceProvider(User):
+class ServiceProvider(models.Model):
+    username = models.CharField(max_length=55)
+    first_name = models.CharField(max_length=55)
+    last_name = models.CharField(max_length=55)
+    email = models.EmailField(unique=True)
+    address = models.CharField(max_length=55)
+    contact = models.CharField(max_length=20,
+                               help_text='Enter phone number')
+    birth_date = models.DateField(null=True)
+
     comapny_name = models.CharField(max_length=55, null=True)
     service_area = models.TextField(help_text='Please provide service area(s)')
 
