@@ -12,13 +12,14 @@ class Customer(models.Model):
         (MEMBERSHIP_GOLD, 'Gold'),
     ]
 
-    username = models.CharField(max_length=55)
-    first_name = models.CharField(max_length=55)
-    last_name = models.CharField(max_length=55)
-    email = models.EmailField(unique=True)
-    address = models.CharField(max_length=55)
+    username = models.CharField(max_length=255, default='John Doe')
+    first_name = models.CharField(max_length=55, default='john')
+    last_name = models.CharField(max_length=55, default='Doe')
+    email = models.EmailField(unique=True, default='abc@gmail.com')
+    address = models.CharField(max_length=55, default='Biyem-assi')
     contact = models.CharField(max_length=20,
-                               help_text='Enter phone number')
+                               help_text='Enter phone number',
+                               default='+237XXXXXXXXX')
     birth_date = models.DateField(null=True)
 
     membership = models.CharField(max_length=1,
@@ -27,13 +28,14 @@ class Customer(models.Model):
 
 
 class ServiceProvider(models.Model):
-    username = models.CharField(max_length=55)
-    first_name = models.CharField(max_length=55)
-    last_name = models.CharField(max_length=55)
-    email = models.EmailField(unique=True)
-    address = models.CharField(max_length=55)
+    username = models.CharField(max_length=255, default='John Doe')
+    first_name = models.CharField(max_length=55, default='john')
+    last_name = models.CharField(max_length=55, default='Doe')
+    email = models.EmailField(unique=True, default='abc@gmail.com')
+    address = models.CharField(max_length=55, default='Biyem-assi')
     contact = models.CharField(max_length=20,
-                               help_text='Enter phone number')
+                               help_text='Enter phone number',
+                               default='+237XXXXXXXXX')
     birth_date = models.DateField(null=True)
 
     comapny_name = models.CharField(max_length=55, null=True)
