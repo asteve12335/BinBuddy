@@ -14,7 +14,8 @@ class Customer(models.Model):
 
     first_name = models.CharField(max_length=55, default='john')
     last_name = models.CharField(max_length=55, default='Doe')
-    username = models.CharField(max_length=100, default=first_name + last_name)
+    username = models.CharField(
+        max_length=100, default=f"{first_name} + {last_name}")
     email = models.EmailField(unique=True, default='abc@gmail.com')
     address = models.CharField(max_length=55, default='Biyem-assi')
     contact = models.CharField(max_length=20,
