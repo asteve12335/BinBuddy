@@ -31,7 +31,8 @@ class Customer(models.Model):
 class ServiceProvider(models.Model):
     first_name = models.CharField(max_length=55, default='john')
     last_name = models.CharField(max_length=55, default='Doe')
-    username = models.CharField(max_length=100, default=f"{first_name} + {last_name}")
+    username = models.CharField(
+        max_length=100, default=f"{first_name} + {last_name}")
     email = models.EmailField(unique=True, default='abc@gmail.com')
     address = models.CharField(max_length=55, default='Biyem-assi')
     contact = models.CharField(max_length=20,
@@ -39,7 +40,7 @@ class ServiceProvider(models.Model):
                                default='+237XXXXXXXXX')
     birth_date = models.DateField(null=True)
 
-    comapny_name = models.CharField(max_length=55, null=True)
+    company_name = models.CharField(max_length=55, null=True)
     service_area = models.TextField(help_text='Please provide service area(s)')
 
 
