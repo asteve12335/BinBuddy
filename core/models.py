@@ -12,9 +12,9 @@ class Customer(models.Model):
         (MEMBERSHIP_GOLD, 'Gold'),
     ]
 
-    username = models.CharField(max_length=255, default='John Doe')
     first_name = models.CharField(max_length=55, default='john')
     last_name = models.CharField(max_length=55, default='Doe')
+    username = first_name + last_name
     email = models.EmailField(unique=True, default='abc@gmail.com')
     address = models.CharField(max_length=55, default='Biyem-assi')
     contact = models.CharField(max_length=20,
