@@ -1,23 +1,28 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import ServiceProvider
-from .serializers import ServiceProviderSerializer
+from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, RetrieveModelMixin
+from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from .models import ServiceProvider, Customer
+from .serializers import ServiceProviderSerializer, CustomerSerializer
 
 # Create your views here.
-
-
-@api_view()
-def service_provider_list(request):
+class ServiceProviderViewSet(ModelViewSet):
     queryset = ServiceProvider.objects.all()
-    serializer = ServiceProviderSerializer(queryset, many=True)
-    return Response(serializer.data)
+    serializer_class = ServiceProviderSerializer
+
+    def get_serializer_context(self):
+        return {'request': self.request}
 
 
-@api_view()
-def service_provider_detail(request, id):
-    service_provider = get_object_or_404(ServiceProvider, pk=id)
-    serializer = ServiceProviderSerializer(service_provider)
-    return Response(serializer.data)
+class CustomerViewSet(CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, GenericViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+
+    @action(detail=False)
+    def me(self, request):
+        customer = Customer.objects.get(user_id=request.user.id)
+        serializer = CustomerSerializer(customer)
+        return Response(serializer.data)

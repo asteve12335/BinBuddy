@@ -1,7 +1,10 @@
 from django.urls import path
+from django.urls.conf import include
+from rest_framework.routers import DefaultRouter
 from . import views
 
-urlpatterns = [
-    path('serviceproviders/', views.service_provider_list),
-    path('serviceproviders/<int:id>/', views.service_provider_detail),
-]
+router = DefaultRouter()
+router.register('serviceproviders', views.ServiceProviderViewSet)
+router.register('customers', views.CustomerViewSet)
+
+urlpatterns = router.urls
